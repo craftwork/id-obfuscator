@@ -1,0 +1,17 @@
+{
+    "name": "lux-php/id-obfuscator",
+    "require-dev": {
+        "phpspec/phpspec": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "7.0"
+        },
+        "bin-dir": "bin"
+    }
+}
