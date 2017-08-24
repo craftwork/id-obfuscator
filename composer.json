@@ -1,5 +1,8 @@
 {
     "name": "craftwork/id-obfuscator",
+    "require": {
+        "php": "^7.0"
+    },
     "require-dev": {
         "phpspec/phpspec": "^3.4",
         "leanphp/phpspec-code-coverage": "^3.1"
@@ -10,9 +13,6 @@
         }
     },
     "config": {
-        "platform": {
-            "php": "7.0"
-        },
         "bin-dir": "bin"
     }
 }
