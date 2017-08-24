@@ -1,0 +1,25 @@
+language: php
+php:
+  - '7.0'
+  - '7.1'
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+install:
+  - composer install
+
+script:
+  - ./bin/phpspec run --format=dot
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/7b94e15f0dd9019cb598
+    on_success: change
+    on_failure: always
+    on_start: never

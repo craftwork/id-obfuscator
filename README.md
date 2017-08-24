@@ -1,5 +1,8 @@
 # ID Obfuscator (beta)
 
+[![Build Status](https://travis-ci.org/craftwork/id-obfuscator.svg?branch=master)](https://travis-ci.org/craftwork/id-obfuscator)
+[![codecov](https://codecov.io/gh/craftwork/id-obfuscator/branch/master/graph/badge.svg)](https://codecov.io/gh/craftwork/id-obfuscator)
+
 A simple encoder to obfuscate database IDs.
 
 This is particularly useful when you don't want to expose sensitive information about your application, for instance the number of users or orders.
