@@ -1,11 +1,11 @@
 {
-    "name": "lux-php/id-obfuscator",
+    "name": "craftwork/id-obfuscator",
     "require-dev": {
         "phpspec/phpspec": "^3.4"
     },
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "Craftwork\\": "src/"
         }
     },
     "config": {
