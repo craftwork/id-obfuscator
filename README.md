@@ -64,7 +64,7 @@ any duplicates. The default is `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV
 
 ```php
 $salt = 'test';
-$customCharacterSet = '0123456789abcdef';
+$customCharacterSet = CharacterSet::ofCustomeCharacters('0123456789abcdef');
 $obfuscator = new IdObfuscator($salt, $customCharacterSet);
 $obfuscator->encode(16); // 10 (string)
 ```
