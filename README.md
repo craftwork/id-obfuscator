@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/craftwork/id-obfuscator.svg?branch=master)](https://travis-ci.org/craftwork/id-obfuscator)
 [![codecov](https://codecov.io/gh/craftwork/id-obfuscator/branch/master/graph/badge.svg)](https://codecov.io/gh/craftwork/id-obfuscator)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/craftwork/id-obfuscator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/craftwork/id-obfuscator/?branch=master)
 
 A simple encoder to obfuscate database IDs.
 
