@@ -1,5 +1,19 @@
 {
     "name": "craftwork/id-obfuscator",
+    "description": "A base converter to obfuscate database IDs in front end applications",
+    "homepage": "https://github.com/craftwork/id-obfuscator",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Francesco Cocchianella",
+            "homepage": "https://github.com/fra-c"
+        },
+        {
+            "name": "Craftwork",
+            "homepage": "https://github.com/craftwork"
+        }
+    ],
     "require": {
         "php": "^7.0"
     },
