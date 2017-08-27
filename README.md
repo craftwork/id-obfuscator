@@ -1,8 +1,10 @@
 # ID Obfuscator (beta)
 
-[![Build Status](https://travis-ci.org/craftwork/id-obfuscator.svg?branch=master)](https://travis-ci.org/craftwork/id-obfuscator)
-[![codecov](https://codecov.io/gh/craftwork/id-obfuscator/branch/master/graph/badge.svg)](https://codecov.io/gh/craftwork/id-obfuscator)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/craftwork/id-obfuscator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/craftwork/id-obfuscator/?branch=master)
+[![Build status](https://img.shields.io/travis/craftwork/id-obfuscator.svg?style=flat-square)](https://travis-ci.org/craftwork/id-obfuscator.svg?branch=master)
+[![Code coverage](https://img.shields.io/codecov/c/github/craftwork/id-obfuscator.svg?style=flat-square)](https://codecov.io/gh/craftwork/id-obfuscator)
+[![Code quality](https://img.shields.io/scrutinizer/g/craftwork/id-obfuscator.svg?style=flat-square)](https://codecov.io/gh/craftwork/id-obfuscator)
+[![Packagist](https://img.shields.io/packagist/v/craftwork/id-obfuscator.svg?style=flat-square)](https://packagist.org/packages/craftwork/id-obfuscator)
+[![Chat](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/craftwork/Lobby)
 
 A simple encoder to obfuscate database IDs.
 
