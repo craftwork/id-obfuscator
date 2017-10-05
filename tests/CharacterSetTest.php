@@ -20,9 +20,15 @@ class CharacterSetTest extends TestCase
         CharacterSet::ofCustomCharacters('abcda');
     }
 
-    public function testThrowsInvalidCharacterSetExceptionIfCustomCharacterSetContainsNonAscii()
+    public function testThrowsInvalidCharacterSetExceptionIfCustomCharacterSetContainsExtendedAscii()
     {
         $this->expectException(InvalidCharacterSetException::class);
-        CharacterSet::ofCustomCharacters('ß');
+        CharacterSet::ofCustomCharacters(chr(128) . chr(129));
+    }
+
+    public function testThrowsInvalidCharacterSetExceptionIfCustomCharacterSetContainsUtf8()
+    {
+        $this->expectException(InvalidCharacterSetException::class);
+        CharacterSet::ofCustomCharacters('ßßß');
     }
 }
