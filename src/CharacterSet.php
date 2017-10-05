@@ -9,7 +9,8 @@ use Craftwork\IdObfuscator\Exception\InvalidCharacterSetLengthException;
 
 final class CharacterSet
 {
-    const CHARSET_DEFAULT = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_';
+    const CHARSET_DEFAULT = 'bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ1234567890-_';
+    const CHARSET_HEX = '0123456789abcdef';
 
     /**
      * @var string
@@ -17,7 +18,16 @@ final class CharacterSet
     private $characters;
 
     /**
+     * @var int
+     */
+    private $length;
+
+    /**
      * @param string $characters
+     *
+     * @throws DuplicateCharacterException
+     * @throws InvalidCharacterSetException
+     * @throws InvalidCharacterSetLengthException
      */
     private function __construct(string $characters)
     {
@@ -31,23 +41,31 @@ final class CharacterSet
     /**
      * @param string $characters
      *
-     * @return CharacterSet
+     * @return self
      *
      * @throws InvalidCharacterSetLengthException
      * @throws DuplicateCharacterException
      * @throws InvalidCharacterSetException
      */
-    public static function ofCustomCharacters(string $characters): CharacterSet
+    public static function ofCustomCharacters(string $characters): self
     {
         return new self($characters);
     }
 
     /**
-     * @return CharacterSet
+     * @return self
      */
-    public static function ofDefaultCharacters(): CharacterSet
+    public static function ofDefaultCharacters(): self
     {
         return new self(self::CHARSET_DEFAULT);
+    }
+
+    /**
+     * @return self
+     */
+    public static function ofHexCharacters(): self
+    {
+        return new self(self::CHARSET_HEX);
     }
 
     /**
@@ -59,15 +77,19 @@ final class CharacterSet
     }
 
     /**
+     * Creates a new instance using the same character set, but shuffled with the salt to obscure how the ID is
+     * generated.
+     *
      * @param string $salt
-     * @return CharacterSet
+     *
+     * @return self
      */
-    public function shuffleCharacterSetWithSalt(string $salt): CharacterSet
+    public function shuffleWithSalt(string $salt): self
     {
         $saltLength = strlen($salt);
 
         if ($saltLength === 0) {
-            return $this;
+            return new self($this->characters);
         }
 
         $characterSet = $this->characters;
@@ -88,7 +110,11 @@ final class CharacterSet
      */
     public function length(): int
     {
-        return strlen($this->characters);
+        if ($this->length === null) {
+            $this->length = strlen($this->characters);
+        }
+
+        return $this->length;
     }
 
     /**
@@ -98,7 +124,7 @@ final class CharacterSet
      */
     private function assertCharactersLength(string $characters)
     {
-        if ('' === $characters || 2 > strlen($characters)) {
+        if (strlen($characters) < 2) {
             throw new InvalidCharacterSetLengthException('$characters must be at least 2 characters long.');
         }
     }
@@ -110,9 +136,9 @@ final class CharacterSet
      */
     private function assertNoDuplicateCharacters(string $characters)
     {
-        if ($characters !== implode(array_keys(array_flip(str_split($characters))))) {
+        if ($characters !== implode(array_unique(str_split($characters)))) {
             throw new DuplicateCharacterException(
-                sprintf('Duplicate characters found in character string %s.', $characters)
+                sprintf('Duplicate characters found in character string: %s', $characters)
             );
         }
     }
@@ -124,8 +150,10 @@ final class CharacterSet
      */
     private function assertAllAsciiCharacters(string $characters)
     {
-        if (1 === preg_match('/[\\x80-\\xff]+/', $characters)) {
-            throw new InvalidCharacterSetException($characters);
+        if (preg_match('/[\\x80-\\xff]+/', $characters) === 1) {
+            throw new InvalidCharacterSetException(
+                sprintf('Character set has characters outside of the ASCII range: %s', $characters)
+            );
         }
     }
 }

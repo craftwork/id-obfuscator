@@ -1,4 +1,4 @@
-# ID Obfuscator (beta)
+# ID Obfuscator
 
 [![Build status](https://img.shields.io/travis/craftwork/id-obfuscator.svg?style=flat-square)](https://travis-ci.org/craftwork/id-obfuscator.svg?branch=master)
 [![Code coverage](https://img.shields.io/codecov/c/github/craftwork/id-obfuscator.svg?style=flat-square)](https://codecov.io/gh/craftwork/id-obfuscator)
@@ -32,7 +32,7 @@ It is not advisable saving encoded numbers but encoding and decoding IDs on the 
  
 You can use a custom character set and a salt to shuffle the characters. Keep the salt private.
 
-It is not advisable to change these at run time as some users might share or bookmark links. To ensure users don't end up on broken links always use the same character set and salt. If the links are restricted to logged in users it might be a good idea to use a user specific salt, such as an uuid.
+It is not advisable to change these at run time as some users might share or bookmark links. To ensure users don't end up on broken links always use the same character set and salt. If the links are restricted to logged in users it might be a good idea to use a user specific salt, such as a uuid.
 
 ## Installation
 
@@ -56,20 +56,18 @@ $obfuscator->decode('m'); // 10
 $obfuscator->decode('oK-k'); // 1234566
 ```
 
-### Custom character set
+### Character sets
+
+The default character set is `bcdefghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ1234567890-_`. An additional character set
+is also built in which only uses lowercase hexadecimal characters (`CharacterSet::ofHexCharacters()`).
 
 You can provide your own character set if you want to either limit the encoding to certain characters or use different
-characters. Characters need to be ASCII and the character set must be at least two characters long and not contain
-any duplicates. The default is `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_`.
+characters. Characters need to be ASCII and the character set must be at least two characters long and not contain any
+duplicates.
 
 ```php
 $salt = 'test';
-$customCharacterSet = CharacterSet::ofCustomeCharacters('0123456789abcdef');
+$customCharacterSet = CharacterSet::ofCustomCharacters('ambidextrously');
 $obfuscator = new IdObfuscator($salt, $customCharacterSet);
 $obfuscator->encode(16); // 10 (string)
 ```
-
-## TODO
-
-- Some unfortunate IDs might generate swear word: find a way to avoid them.
-- Add support for big numbers.

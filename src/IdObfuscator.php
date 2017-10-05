@@ -11,17 +11,17 @@ final class IdObfuscator
     private $characterSet;
 
     /**
-     * @param string       $salt Salt that should be unique and kept secret for your application.
+     * @param string $salt Salt that should be unique and kept secret for your application.
      * @param CharacterSet $characterSet An optional character set.
      */
     public function __construct(string $salt, CharacterSet $characterSet = null)
     {
-        $this->characterSet = (null === $characterSet ? CharacterSet::ofDefaultCharacters() : $characterSet)
-            ->shuffleCharacterSetWithSalt($salt);
+        $this->characterSet = ($characterSet ?? CharacterSet::ofDefaultCharacters())->shuffleWithSalt($salt);
     }
 
     /**
      * @param int $number The ID/number to encode.
+     *
      * @return string The obfuscated ID.
      */
     public function encode(int $number): string
@@ -38,6 +38,7 @@ final class IdObfuscator
 
     /**
      * @param string $string This will be the obfuscated ID as returned by self::encode.
+     *
      * @return int The original ID.
      */
     public function decode(string $string): int
